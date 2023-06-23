@@ -14,33 +14,30 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 2
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - {{ compiler('c') }}              # [not win]
-    - {{ compiler('m2w64_c') }}        # [win]
-    - {{ compiler('cxx') }}            # [not win]
-    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ compiler('c') }}          # [not win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ compiler('cxx') }}        # [not win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}make
     - {{ posix }}sed               # [win]
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - libopenblas
-    - _openmp_mutex                # [linux]
+    - libblas
+    - libgomp                      # [linux]
     - llvm-openmp                  # [osx]
     - r-base
     - r-rcpp
     - r-rcpparmadillo
   run:
-    - libopenblas
-    - _openmp_mutex                # [linux]
-    - llvm-openmp                  # [osx]
     - r-base
     - {{ native }}gcc-libs         # [win]
     - r-rcpp
@@ -58,29 +55,8 @@ about:
   license_family: GPL3
   license_file:
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 
 extra:
   recipe-maintainers:
     - conda-forge/r
-
-# Package: rdist
-# Title: Calculate Pairwise Distances
-# Version: 0.0.5
-# Authors@R: person("Nello", "Blaser", email = "nello.blaser@uib.no", role = c("aut", "cre"))
-# Description: A common framework for calculating distance matrices.
-# Depends: R (>= 3.2.2)
-# License: GPL
-# URL: https://github.com/blasern/rdist
-# BugReports: https://github.com/blasern/rdist/issues
-# Encoding: UTF-8
-# LazyData: true
-# LinkingTo: Rcpp, RcppArmadillo
-# Imports: Rcpp, methods
-# RoxygenNote: 7.1.0
-# Suggests: testthat
-# NeedsCompilation: yes
-# Packaged: 2020-05-04 12:51:18 UTC; nbl003
-# Author: Nello Blaser [aut, cre]
-# Maintainer: Nello Blaser <nello.blaser@uib.no>
-# Repository: CRAN
-# Date/Publication: 2020-05-04 16:00:02 UTC
